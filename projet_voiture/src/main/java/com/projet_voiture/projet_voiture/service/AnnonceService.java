@@ -41,8 +41,10 @@ public class AnnonceService {
     private TresorerieService tresorerieService;
     @Autowired
     private HistoriqueValidationService historiqueValidationService;
-    // @Autowired
-    // private HistoriqueAnnonceService historiqueAnnonceService;
+    @Autowired
+    private VoitureService voitureService;
+    @Autowired
+    private ModeleService modeleService;
 
     public Annonce insert(Annonce Annonce) {
         Annonce.setIdannonce(UUID.randomUUID().toString().split("-")[0]);
@@ -96,39 +98,6 @@ public class AnnonceService {
     public Annonce findById(String AnnonceId){
         return repository.findById(AnnonceId).get();
     }
-     
-    // public Annonce modifAnnonce(Annonce annonce)
-    // {
-    //     Annonce annonceTemp = findById(annonce.getIdannonce());
-
-    //     HistoriqueAnnonce historiqueAnnonce = new HistoriqueAnnonce();
-    //     historiqueAnnonce.setIdAnnonce(annonceTemp.getIdannonce());
-    //     historiqueAnnonce.setDescri(annonceTemp.getDescri());
-    //     historiqueAnnonce.setPrix(annonceTemp.getPrix());
-    //     historiqueAnnonce.setDatepub(annonceTemp.getDatepub());
-    //     historiqueAnnonce.setIdVoiture(annonceTemp.getIdvoiture());
-    //     historiqueAnnonce.setIdUtilisateur(annonceTemp.getIdutilisateur());
-
-    //     historiqueAnnonceService.insertHistoriqueAnnonce(historiqueAnnonce);
-
-    //     return repository.save(annonce);
-    // }
-    // public List<Annonce> findAll() {
-    //     return repository.findAll();
-    // }
-    // public Annonce updateAnnonce(Annonce AnnonceRequest){
-    //     Annonce existingAnnonce = repository.findById(AnnonceRequest.getIdannonce()).get();
-    //     existingAnnonce.setDatepub(AnnonceRequest.getDatepub());
-    //     existingAnnonce.setDescri(AnnonceRequest.getDescri());
-    //     existingAnnonce.setIdutilisateur(AnnonceRequest.getIdutilisateur());
-    //     existingAnnonce.setIdvoiture(AnnonceRequest.getIdvoiture());
-    //     existingAnnonce.setPrix(AnnonceRequest.getPrix());
-    //     return repository.save(existingAnnonce);
-    // }
-    // public String deleteAnnonce(String AnnonceId){
-    //     repository.deleteById(AnnonceId);
-    //     return AnnonceId+" Annonce deleted from dashboard ";
-    // }
 
     public Page<Annonce> searchByPrixBetween(double prixMin, double prixMax, int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "prix"));

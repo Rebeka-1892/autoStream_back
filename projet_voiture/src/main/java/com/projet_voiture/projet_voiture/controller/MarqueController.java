@@ -1,5 +1,6 @@
 package com.projet_voiture.projet_voiture.controller;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.projet_voiture.projet_voiture.modele.Marque;
 import com.projet_voiture.projet_voiture.service.MarqueService;
+import com.projet_voiture.projet_voiture.util.ImageService;
+import com.projet_voiture.projet_voiture.util.Photo;
 
 import jakarta.servlet.annotation.MultipartConfig;
 
@@ -39,6 +42,11 @@ public class MarqueController {
     @PostMapping
     public ResponseEntity<Marque> insert(@RequestBody Marque Marque) {
         try {
+            String base64 = Marque.getPhoto();
+            Photo photo = new Photo(base64, "night.png");
+            ImageService imageService = new ImageService();
+            String url = imageService.upload(photo);
+            Marque.setPhoto(url);
             Marque inserted = service.insert(Marque);
             System.out.println("tafiditra");
             return new ResponseEntity<>(inserted, HttpStatus.CREATED);

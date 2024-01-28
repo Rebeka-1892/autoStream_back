@@ -1,21 +1,17 @@
 package com.projet_voiture.projet_voiture.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
 
-// import com.projet_voiture.projet_voiture.service.FavoriService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.projet_voiture.projet_voiture.modele.Annonce;
-// import com.projet_voiture.projet_voiture.modele.Favori;
-// import com.projet_voiture.projet_voiture.modele.HistoriqueAnnonce;
 import com.projet_voiture.projet_voiture.modele.Utilisateur;
 import com.projet_voiture.projet_voiture.modele.Validation;
 import com.projet_voiture.projet_voiture.repository.UtilisateurRepository;
 import com.projet_voiture.projet_voiture.service.AnnonceService;
-// import com.projet_voiture.projet_voiture.service.HistoriqueAnnonceService;
 import com.projet_voiture.projet_voiture.service.ValidationService;
 
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +30,6 @@ public class AnnonceController {
     private UtilisateurRepository repository;
     @Autowired
     private ValidationService servicevalidation;
-    // @Autowired
-    // private HistoriqueAnnonceService historiqueAnnonceService;
 
     @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     @GetMapping("/historique")
@@ -86,31 +80,7 @@ public class AnnonceController {
         return service.findById(AnnonceId);
     }
 
-    // @GetMapping
-    // public List<Annonce> findAll() {
-    //     return service.findAll();
-    // }
-    // @PutMapping
-    // public Annonce updateAnnonce(@RequestBody Annonce Annonce) {
-    //     return service.updateAnnonce(Annonce);
-    // }
-    // @DeleteMapping("/{AnnonceId}")
-    // public String deleteAnnonce(@PathVariable String AnnonceId) {
-    //     return service.deleteAnnonce(AnnonceId);
-    // }
-    // @PostMapping("/modifAnnonce")
-    // public ResponseEntity<Annonce> updateAnnonceHistorique(@RequestBody Annonce annonce)
-    // {
-    //     Annonce a = service.modifAnnonce(annonce);
-    //     return ResponseEntity.ok().body(a);
-    // }
-    // @GetMapping("/histo/{idAnnonce}")
-    // public List<HistoriqueAnnonce> getHistoriqueAnnonceByIdAnnonce(@PathVariable String idAnnonce)
-    // {
-    //     return historiqueAnnonceService.getAllHistoAnnonceByIdAnnonce(idAnnonce);
-    // }
-
-    @GetMapping("/annonces/parPrix")
+    @GetMapping("/parPrix")
     public Page<Annonce> searchByPrixBetween(
             @RequestParam("prixMin") double prixMin,
             @RequestParam("prixMax") double prixMax,
@@ -119,7 +89,7 @@ public class AnnonceController {
         return service.searchByPrixBetween(prixMin, prixMax, page, size);
     }
 
-    @GetMapping("/annonces/modele/{idModele}")
+    @GetMapping("/modele/{idModele}")
     public Page<Annonce> getAnnoncesByModeleId(
             @PathVariable int idModele,
             @RequestParam(name = "page", defaultValue = "0") int page,
@@ -127,7 +97,7 @@ public class AnnonceController {
         return service.getAnnoncesByIdModele(idModele, page, size);
     }
 
-    @GetMapping("/annonces/categorie/{idCategorie}")
+    @GetMapping("/categorie/{idCategorie}")
     public Page<Annonce> getAnnonceByIdCategorie(
             @PathVariable int idCategorie,
             @RequestParam(name = "page", defaultValue = "0") int page,
@@ -135,7 +105,7 @@ public class AnnonceController {
         return service.getAnnonceByIdCategorie(idCategorie, page, size);
     }
 
-    @GetMapping("/annonces/marque/{idMarque}")
+    @GetMapping("/marque/{idMarque}")
     public Page<Annonce> getAnnonceByIdMarque(
             @PathVariable int idMarque,
             @RequestParam(name = "page", defaultValue = "0") int page,
@@ -143,7 +113,7 @@ public class AnnonceController {
         return service.getAnnonceByIdMarque(idMarque, page, size);
     }
     
-    @GetMapping("/annonces/dateSortie")
+    @GetMapping("/dateSortie")
     public Page<Annonce> getAnnoncesByDateSortie(
             @RequestParam String dateDebut,
             @RequestParam String dateFin,
@@ -156,7 +126,7 @@ public class AnnonceController {
         }
     }
 
-    @GetMapping("/annonces/motCle")
+    @GetMapping("/motCle")
     public Page<Annonce> getAnnoncesByKeyWord(
             @RequestParam String motCle,
             @RequestParam(name = "page", defaultValue = "0") int page,
