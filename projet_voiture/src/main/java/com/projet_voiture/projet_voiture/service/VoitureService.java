@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.projet_voiture.projet_voiture.modele.Voiture;
 import com.projet_voiture.projet_voiture.repository.VoitureRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,5 +48,17 @@ public class VoitureService {
     public String deleteVoiture(String VoitureId){
         repository.deleteById(VoitureId);
         return VoitureId+" Voiture deleted from dashboard ";
+    }
+
+    public List<Voiture> getVoituresByModeleId(int idModele) {
+        return repository.findByIdmodele(idModele);
+    }
+
+    public List<Voiture> getVoitureByIdModeleIn(List<Integer> idModele) {
+        return repository.findByIdmodeleIn(idModele);
+    }
+
+    public List<Voiture> findByDatesortieBetween(Date dateDebut, Date dateFin) {
+        return repository.findByDatesortieBetween(dateDebut, dateFin);
     }
 }

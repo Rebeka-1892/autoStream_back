@@ -34,4 +34,14 @@ public class ModeleService {
     public void deleteById(int idModele) {
         repository.deleteById(idModele);
     }
+
+    public List<Modele> findByIdCategorie(int idCategorie)
+    {
+        return repository.findByIdCategorie(idCategorie);
+    }
+
+    public List<Modele> findByIdMarque(int idMarque)
+    {
+        return repository.findByIdMarque(idMarque);
+    }
 }

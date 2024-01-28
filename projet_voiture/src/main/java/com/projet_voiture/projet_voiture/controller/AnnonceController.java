@@ -110,4 +110,58 @@ public class AnnonceController {
     //     return historiqueAnnonceService.getAllHistoAnnonceByIdAnnonce(idAnnonce);
     // }
 
+    @GetMapping("/annonces/parPrix")
+    public Page<Annonce> searchByPrixBetween(
+            @RequestParam("prixMin") double prixMin,
+            @RequestParam("prixMax") double prixMax,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        return service.searchByPrixBetween(prixMin, prixMax, page, size);
+    }
+
+    @GetMapping("/annonces/modele/{idModele}")
+    public Page<Annonce> getAnnoncesByModeleId(
+            @PathVariable int idModele,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        return service.getAnnoncesByIdModele(idModele, page, size);
+    }
+
+    @GetMapping("/annonces/categorie/{idCategorie}")
+    public Page<Annonce> getAnnonceByIdCategorie(
+            @PathVariable int idCategorie,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        return service.getAnnonceByIdCategorie(idCategorie, page, size);
+    }
+
+    @GetMapping("/annonces/marque/{idMarque}")
+    public Page<Annonce> getAnnonceByIdMarque(
+            @PathVariable int idMarque,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        return service.getAnnonceByIdMarque(idMarque, page, size);
+    }
+    
+    @GetMapping("/annonces/dateSortie")
+    public Page<Annonce> getAnnoncesByDateSortie(
+            @RequestParam String dateDebut,
+            @RequestParam String dateFin,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        try {
+            return service.getAnnoncesByDateSortie(dateDebut, dateFin, page, size);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @GetMapping("/annonces/motCle")
+    public Page<Annonce> getAnnoncesByKeyWord(
+            @RequestParam String motCle,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+        return service.getAnnoncesByKeyWord(motCle, page, size);       
+    }
+
 }
