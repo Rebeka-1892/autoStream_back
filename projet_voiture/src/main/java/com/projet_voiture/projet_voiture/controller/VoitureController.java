@@ -23,12 +23,12 @@ public class VoitureController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Voiture insert(@RequestBody Voiture Voiture) throws Exception {
-        for (int i = 0; i < Voiture.getPhotos().length; i++) {            
-            Photo photo = new Photo(Voiture.getPhotos()[i], "photovoiture.png");
-            ImageService imageService = new ImageService();
-            String url = imageService.upload(photo);
-            Voiture.getPhotos()[i] = url;
-        }
+        // for (int i = 0; i < Voiture.getPhotos().length; i++) {            
+        //     Photo photo = new Photo(Voiture.getPhotos()[i], "photovoiture.png");
+        //     ImageService imageService = new ImageService();
+        //     String url = imageService.upload(photo);
+        //     Voiture.getPhotos()[i] = url;
+        // }
         return service.insert(Voiture);
     }
 
