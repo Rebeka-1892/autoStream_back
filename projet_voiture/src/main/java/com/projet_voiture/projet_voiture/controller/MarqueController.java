@@ -42,11 +42,11 @@ public class MarqueController {
     @PostMapping
     public ResponseEntity<Marque> insert(@RequestBody Marque Marque) {
         try {
-            String base64 = Marque.getPhoto();
-            Photo photo = new Photo(base64, "night.png");
-            ImageService imageService = new ImageService();
-            String url = imageService.upload(photo);
-            Marque.setPhoto(url);
+            // String base64 = Marque.getPhoto();
+            // Photo photo = new Photo(base64, "night.png");
+            // ImageService imageService = new ImageService();
+            // String url = imageService.upload(photo);
+            // Marque.setPhoto(url);
             Marque inserted = service.insert(Marque);
             System.out.println("tafiditra");
             return new ResponseEntity<>(inserted, HttpStatus.CREATED);

@@ -58,7 +58,7 @@ public class AnnonceService {
         HistoriqueValidation historiqueValidation = new HistoriqueValidation();
         historiqueValidation.setIdvalidation(existingValidation.getIdvalidation());
         historiqueValidation.setIdannonce(existingValidation.getIdannonce());
-        historiqueValidation.setEtat(existingValidation.getEtat());
+        historiqueValidation.setEtat(ValidationRequest.getEtat());
         historiqueValidation.setDatemodif(existingValidation.getDatemodif());
 
         historiqueValidationService.insertHistoriqueValidation(historiqueValidation);
