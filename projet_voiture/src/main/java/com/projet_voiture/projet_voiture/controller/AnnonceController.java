@@ -43,6 +43,11 @@ public class AnnonceController {
         }
         return null;
     }
+
+    @PutMapping()
+    public Validation updateValidation(@RequestBody Validation Validation) {
+        return service.updateValidation(Validation);
+    }
     
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/unvalid")
@@ -81,44 +86,27 @@ public class AnnonceController {
     }
 
     @GetMapping("/parPrix")
-    public Page<Annonce> searchByPrixBetween(
-            @RequestParam("prixMin") double prixMin,
-            @RequestParam("prixMax") double prixMax,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> searchByPrixBetween( @RequestParam("prixMin") double prixMin, @RequestParam("prixMax") double prixMax, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         return service.searchByPrixBetween(prixMin, prixMax, page, size);
     }
 
     @GetMapping("/modele/{idModele}")
-    public Page<Annonce> getAnnoncesByModeleId(
-            @PathVariable int idModele,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> getAnnoncesByModeleId( @PathVariable int idModele, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         return service.getAnnoncesByIdModele(idModele, page, size);
     }
 
     @GetMapping("/categorie/{idCategorie}")
-    public Page<Annonce> getAnnonceByIdCategorie(
-            @PathVariable int idCategorie,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> getAnnonceByIdCategorie( @PathVariable int idCategorie, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         return service.getAnnonceByIdCategorie(idCategorie, page, size);
     }
 
     @GetMapping("/marque/{idMarque}")
-    public Page<Annonce> getAnnonceByIdMarque(
-            @PathVariable int idMarque,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> getAnnonceByIdMarque( @PathVariable int idMarque, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         return service.getAnnonceByIdMarque(idMarque, page, size);
     }
     
     @GetMapping("/dateSortie")
-    public Page<Annonce> getAnnoncesByDateSortie(
-            @RequestParam String dateDebut,
-            @RequestParam String dateFin,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> getAnnoncesByDateSortie( @RequestParam String dateDebut, @RequestParam String dateFin, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         try {
             return service.getAnnoncesByDateSortie(dateDebut, dateFin, page, size);
         } catch (Exception e) {
@@ -127,10 +115,7 @@ public class AnnonceController {
     }
 
     @GetMapping("/motCle")
-    public Page<Annonce> getAnnoncesByKeyWord(
-            @RequestParam String motCle,
-            @RequestParam(name = "page", defaultValue = "0") int page,
-            @RequestParam(name = "size", defaultValue = "10") int size) {
+    public Page<Annonce> getAnnoncesByKeyWord( @RequestParam String motCle, @RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
         return service.getAnnoncesByKeyWord(motCle, page, size);       
     }
 
